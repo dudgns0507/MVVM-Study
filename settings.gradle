@@ -1,0 +1,3 @@
+rootProject.name = "MVVM-cropo"
+include ':app'
+include ':core'
