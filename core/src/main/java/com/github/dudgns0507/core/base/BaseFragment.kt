@@ -8,20 +8,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
-    protected val TAG: String by lazy {
-        javaClass.simpleName.substring(javaClass.simpleName.lastIndexOf(".") + 1)
-            .apply {
-                if (length > 23) {
-                    replace("Fragment", "")
+    companion object {
+        protected val TAG: String by lazy {
+            val name = this::class.java.simpleName
+            name.substring(name.lastIndexOf(".") + 1)
+                .apply {
+                    if (length > 23) {
+                        replace("Fragment", "")
+                    }
                 }
-            }
+        }
     }
 
-    lateinit var dataBinding: T
+    lateinit var binding: T
     lateinit var act: AppCompatActivity
-    lateinit var baseAct: BaseActivity<*>
+    lateinit var baseAct: BaseActivity<*, *, *>
 
     abstract val layoutResId: Int
     abstract val viewModel: BaseViewModel
@@ -33,7 +38,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         super.onCreate(savedInstanceState)
 
         act = requireActivity() as AppCompatActivity
-        baseAct = requireActivity() as BaseActivity<*>
+        baseAct = requireActivity() as BaseActivity<*, *, *>
     }
 
     override fun onCreateView(
@@ -45,12 +50,12 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         initAfterBinding()
         initObserve()
 
-        return dataBinding.root
+        return binding.root
     }
 
     private fun initDataBinding(inflater: LayoutInflater, container: ViewGroup?) {
-        dataBinding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
-        dataBinding.apply {
+        binding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
+        binding.apply {
             lifecycleOwner = this@BaseFragment
         }
     }

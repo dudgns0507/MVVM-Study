@@ -1,15 +1,17 @@
 package com.github.dudgns0507.core.base
 
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding, B : Parcelable, V : BaseViewModel> : AppCompatActivity() {
     companion object {
         const val BUNDLE_KEY = "data"
         protected val TAG: String by lazy {
-            javaClass.simpleName.substring(javaClass.simpleName.lastIndexOf(".") + 1)
+            val name = this::class.java.simpleName
+            name.substring(name.lastIndexOf(".") + 1)
                 .apply {
                     if (length > 23) {
                         replace("Activity", "")
@@ -18,28 +20,37 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         }
     }
 
-    lateinit var dataBinding: T
+    lateinit var binding: T
 
     abstract val layoutResId: Int
-    abstract val viewModel: BaseViewModel
+    abstract val viewModel: V
 
-    abstract fun initObserve()
-    abstract fun initData()
-    abstract fun initAfterBinding()
+    val bundle: B? by lazy {
+        initBundle()
+    }
+
+    private fun initBundle(): B? {
+        return intent.getParcelableExtra(BUNDLE_KEY)
+    }
+
+    abstract fun V.initData()
+    abstract fun V.observe()
+    abstract fun T.bind()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initDataBinding()
-        initAfterBinding()
-        initObserve()
-        initData()
     }
 
     private fun initDataBinding() {
-        dataBinding = DataBindingUtil.setContentView(this, layoutResId)
-        dataBinding.apply {
+        binding = DataBindingUtil.setContentView(this, layoutResId)
+        binding.apply {
             lifecycleOwner = this@BaseActivity
+
+            bind()
         }
+        viewModel.observe()
+        viewModel.initData()
     }
 }

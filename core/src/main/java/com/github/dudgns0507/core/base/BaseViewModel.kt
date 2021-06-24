@@ -1,13 +1,15 @@
 package com.github.dudgns0507.core.base
 
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.github.dudgns0507.core.util.ErrorResponse
 import com.github.dudgns0507.core.util.ResultWrapper
 import java.io.IOException
 
-open class BaseViewModel : ViewModel() {
+open class BaseViewModel(private val state: SavedStateHandle) : ViewModel() {
     private val TAG: String by lazy {
         javaClass.simpleName.substring(javaClass.simpleName.lastIndexOf(".") + 1)
             .replace("ViewModel", "VM")
@@ -35,6 +37,8 @@ open class BaseViewModel : ViewModel() {
 
     private fun showGenericError(error: ErrorResponse) {
         _genericError.postValue(error)
+        state.getLiveData<String>(TAG)
+        state["1"] = ""
     }
 
     fun <T> ResultWrapper<T>.getData(): ResultWrapper.Success<T>? {
@@ -45,5 +49,9 @@ open class BaseViewModel : ViewModel() {
             is ResultWrapper.Success<T> -> return this
         }
         return null
+    }
+
+    fun setBundle(intent: Intent) {
+
     }
 }
