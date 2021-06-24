@@ -1,4 +1,4 @@
-package com.github.dudgns0507.core.util
+package com.github.dudgns0507.core.util.ext
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
