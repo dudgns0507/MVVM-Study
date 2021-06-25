@@ -1,5 +1,7 @@
 package com.github.dudgns0507.core.base
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +27,10 @@ abstract class BaseActivity<T : ViewDataBinding, B : Parcelable, V : BaseViewMod
     abstract val layoutResId: Int
     abstract val viewModel: V
 
+    val ctx: Context by lazy {
+        this
+    }
+
     val bundle: B? by lazy {
         initBundle()
     }
@@ -33,8 +39,8 @@ abstract class BaseActivity<T : ViewDataBinding, B : Parcelable, V : BaseViewMod
         return intent.getParcelableExtra(BUNDLE_KEY)
     }
 
-    abstract fun V.initData()
-    abstract fun V.observe()
+    abstract fun V.load()
+    abstract fun V.regist()
     abstract fun T.bind()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +56,7 @@ abstract class BaseActivity<T : ViewDataBinding, B : Parcelable, V : BaseViewMod
 
             bind()
         }
-        viewModel.observe()
-        viewModel.initData()
+        viewModel.regist()
+        viewModel.load()
     }
 }

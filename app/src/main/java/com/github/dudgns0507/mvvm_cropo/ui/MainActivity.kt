@@ -6,7 +6,9 @@ import android.os.Parcelable
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.github.dudgns0507.core.base.BaseActivity
+import com.github.dudgns0507.core.util.ext.moveTo
 import com.github.dudgns0507.core.util.ext.observe
+import com.github.dudgns0507.core.util.ext.toast
 import com.github.dudgns0507.mvvm_cropo.R
 import com.github.dudgns0507.mvvm_cropo.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,19 +29,24 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainBundle, MainViewModel
         }
     }
 
-    override fun MainViewModel.initData() {
+    override fun MainViewModel.load() {
         requestData()
     }
 
-    override fun MainViewModel.observe() {
+    override fun MainViewModel.regist() {
         observe(posts) {
-            Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
+            toast(it)
         }
     }
 
     override fun ActivityMainBinding.bind() {
-        tvTitle.text = "sfddsf"
+        initSection()
     }
 
+    fun ActivityMainBinding.initSection() {
+        tvTitle.text = "sfddsf"
 
+        moveTo<MainActivity>(MainBundle(t = ""))
+        moveTo<MainActivity>()
+    }
 }
