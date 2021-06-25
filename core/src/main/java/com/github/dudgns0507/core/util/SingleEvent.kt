@@ -1,4 +1,4 @@
-package com.github.dudgns0507.recyclerviewapp.utils
+package com.github.dudgns0507.core.util
 
 import android.util.Log
 import androidx.annotation.MainThread

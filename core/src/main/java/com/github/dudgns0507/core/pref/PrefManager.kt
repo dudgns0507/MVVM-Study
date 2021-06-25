@@ -9,7 +9,7 @@ class PrefManager private constructor(
     private val mode: Int = Context.MODE_PRIVATE
 ) {
     companion object {
-        var context: Context? = null
+        lateinit var context: Context
         var name: String = "DataManager"
         var mode: Int = Context.MODE_PRIVATE
 
@@ -24,7 +24,7 @@ class PrefManager private constructor(
         }
 
         val instance by lazy {
-            PrefManager(context!!, name, mode)
+            PrefManager(context, name, mode)
         }
     }
 

@@ -60,5 +60,6 @@ fun <T> ResultWrapper<T>.isSuccess(): ResultWrapper.Success<T>? {
         is ResultWrapper.ApiError -> null
         is ResultWrapper.UnknownError -> null
         is ResultWrapper.Success<T> -> this
+        else -> null
     }
 }
