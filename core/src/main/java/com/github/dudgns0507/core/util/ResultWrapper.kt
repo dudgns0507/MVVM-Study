@@ -2,6 +2,7 @@ package com.github.dudgns0507.core.util
 
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
@@ -21,10 +22,9 @@ data class ErrorResponse(
 )
 
 suspend fun <T> safeApiCall(
-    dispatcher: CoroutineDispatcher,
     apiCall: suspend () -> T
 ): ResultWrapper<T> {
-    return withContext(dispatcher) {
+    return withContext(Dispatchers.Default) {
         try {
             ResultWrapper.Success(apiCall.invoke())
         } catch (throwable: Throwable) {
