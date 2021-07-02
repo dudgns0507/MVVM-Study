@@ -4,6 +4,7 @@ import com.github.dudgns0507.core.moshi.MyKotlinJsonAdapterFactory
 import com.github.dudgns0507.core.moshi.MyStandardJsonAdapters
 import com.github.dudgns0507.mvvm_cropo.data.service.ApiService
 import com.github.dudgns0507.mvvm_cropo.isDebug
+import com.github.dudgns0507.mvvm_cropo.url
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -24,7 +25,6 @@ class NetworkModule {
     private val timeoutConnect = 30   //In seconds
     private val contentType = "Content-Type"
     private val contentTypeValue = "application/json"
-    private val url = "https://jsonplaceholder.typicode.com/"
 
     private var headerInterceptor = Interceptor { chain ->
         val original = chain.request()

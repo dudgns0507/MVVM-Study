@@ -1,7 +1,6 @@
 package com.github.dudgns0507.core.base
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
@@ -39,9 +38,9 @@ abstract class BaseActivity<T : ViewDataBinding, B : Parcelable, V : BaseViewMod
         return intent.getParcelableExtra(BUNDLE_KEY)
     }
 
-    abstract fun V.load()
-    abstract fun V.regist()
     abstract fun T.bind()
+    abstract fun V.regist()
+    abstract fun V.load()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
