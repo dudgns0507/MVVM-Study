@@ -1,5 +1,6 @@
 package com.github.dudgns0507.mvvm_cropo.data.service
 
+import com.github.dudgns0507.core.util.ResultWrapper
 import com.github.dudgns0507.mvvm_cropo.data.model.Comment
 import com.github.dudgns0507.mvvm_cropo.data.model.Post
 import com.github.dudgns0507.mvvm_cropo.data.model.RequestPostEdit
@@ -10,26 +11,26 @@ interface ApiService {
     suspend fun requestPosts(
         @Query("_start") start: Int,
         @Query("_limit") limit: Int
-    ): List<Post>
+    ): ResultWrapper<List<Post>>
 
     @GET("posts/{postId}")
     suspend fun requestPost(
         @Path("postId") postId: Int
-    ): Post
+    ): ResultWrapper<Post>
 
     @GET("posts/{postId}/comments")
     suspend fun requestPostComments(
         @Path("postId") postId: Int
-    ): List<Comment>
+    ): ResultWrapper<List<Comment>>
 
     @DELETE("posts/{postId}")
     suspend fun deletePost(
         @Path("postId") postId: Int
-    ): String
+    ): ResultWrapper<String>
 
     @PATCH("posts/{postId}")
     suspend fun patchPost(
         @Path("postId") postId: Int,
         @Body post: RequestPostEdit
-    ): Post
+    ): ResultWrapper<Post>
 }

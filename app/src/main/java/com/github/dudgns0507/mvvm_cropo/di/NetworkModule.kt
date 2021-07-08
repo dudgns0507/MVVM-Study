@@ -2,6 +2,7 @@ package com.github.dudgns0507.mvvm_cropo.di
 
 import com.github.dudgns0507.core.moshi.MyKotlinJsonAdapterFactory
 import com.github.dudgns0507.core.moshi.MyStandardJsonAdapters
+import com.github.dudgns0507.core.util.SafeCallAdapterFactory
 import com.github.dudgns0507.mvvm_cropo.data.service.ApiService
 import com.github.dudgns0507.mvvm_cropo.isDebug
 import com.github.dudgns0507.mvvm_cropo.url
@@ -72,6 +73,7 @@ class NetworkModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(url)
+            .addCallAdapterFactory(SafeCallAdapterFactory())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }

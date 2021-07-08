@@ -1,8 +1,8 @@
-package com.github.dudgns0507.recyclerviewapp.ui.post
+package com.github.dudgns0507.mvvm_cropo.ui.post
 
 import androidx.recyclerview.widget.RecyclerView
-import com.github.dudgns0507.recyclerviewapp.data.dto.Comment
-import com.github.dudgns0507.recyclerviewapp.databinding.CommentItemBinding
+import com.github.dudgns0507.mvvm_cropo.data.model.Comment
+import com.github.dudgns0507.mvvm_cropo.databinding.CommentItemBinding
 
 class CommentViewHolder(private val itemBinding: CommentItemBinding) :
     RecyclerView.ViewHolder(itemBinding.root) {

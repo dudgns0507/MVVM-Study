@@ -1,7 +1,6 @@
 package com.github.dudgns0507.core.util
 
 import com.squareup.moshi.Moshi
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -9,11 +8,9 @@ import java.io.IOException
 
 sealed class ResultWrapper<out T> {
     data class Success<out T>(val value: T) : ResultWrapper<T>()
-    data class ApiError(val code: Int? = null, val error: ErrorResponse? = null) :
-        ResultWrapper<Nothing>()
-
+    data class ApiError(val code: Int? = null, val error: ErrorResponse? = null) : ResultWrapper<Nothing>()
     data class NetworkError(val error: IOException) : ResultWrapper<Nothing>()
-    data class UnknownError(val throwable: Throwable) : ResultWrapper<Nothing>()
+    data class UnknownError(val throwable: Throwable?) : ResultWrapper<Nothing>()
 }
 
 data class ErrorResponse(

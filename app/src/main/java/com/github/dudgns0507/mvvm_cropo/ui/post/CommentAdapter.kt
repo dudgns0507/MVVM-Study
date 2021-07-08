@@ -1,11 +1,10 @@
-package com.github.dudgns0507.recyclerviewapp.ui.post
+package com.github.dudgns0507.mvvm_cropo.ui.post
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.dudgns0507.recyclerviewapp.data.dto.Comment
-import com.github.dudgns0507.recyclerviewapp.databinding.CommentItemBinding
-import com.github.dudgns0507.recyclerviewapp.databinding.PostItemBinding
+import com.github.dudgns0507.mvvm_cropo.data.model.Comment
+import com.github.dudgns0507.mvvm_cropo.databinding.CommentItemBinding
 
 class CommentAdapter : RecyclerView.Adapter<CommentViewHolder>() {
     private val comments = arrayListOf<Comment>()

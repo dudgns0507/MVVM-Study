@@ -1,21 +1,23 @@
-package com.github.dudgns0507.recyclerviewapp.ui.post
+package com.github.dudgns0507.mvvm_cropo.ui.post
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.github.dudgns0507.recyclerviewapp.data.dto.Comment
-import com.github.dudgns0507.recyclerviewapp.data.dto.Post
-import com.github.dudgns0507.recyclerviewapp.data.repository.DataRepository
-import com.github.dudgns0507.recyclerviewapp.ui.base.BaseViewModel
-import com.github.dudgns0507.recyclerviewapp.utils.SingleEvent
+import com.github.dudgns0507.core.base.BaseViewModel
+import com.github.dudgns0507.core.util.SingleEvent
+import com.github.dudgns0507.mvvm_cropo.data.model.Comment
+import com.github.dudgns0507.mvvm_cropo.data.model.Post
+import com.github.dudgns0507.mvvm_cropo.data.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PostViewModel @Inject constructor(
+    state: SavedStateHandle,
     private val dataRepository: DataRepository
-) : BaseViewModel() {
+) : BaseViewModel(state) {
     var bundle: Post? = null
 
     val deletePost = SingleEvent<String>()

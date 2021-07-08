@@ -9,7 +9,7 @@ import com.github.dudgns0507.core.base.BaseActivity
 import com.github.dudgns0507.core.util.ext.observe
 import com.github.dudgns0507.mvvm_cropo.R
 import com.github.dudgns0507.mvvm_cropo.databinding.ActivityMainBinding
-import com.github.dudgns0507.recyclerviewapp.ui.post.PostActivity
+import com.github.dudgns0507.mvvm_cropo.ui.post.PostActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

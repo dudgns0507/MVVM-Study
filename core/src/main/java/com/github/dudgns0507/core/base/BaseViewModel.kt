@@ -45,13 +45,9 @@ open class BaseViewModel(private val state: SavedStateHandle) : ViewModel() {
         when (this) {
             is ResultWrapper.NetworkError -> showNetworkError(this.error)
             is ResultWrapper.ApiError -> this.error?.let { showGenericError(it) }
-            is ResultWrapper.UnknownError -> showUnknownError(this.throwable)
+            is ResultWrapper.UnknownError -> this.throwable?.let { showUnknownError(it) }
             is ResultWrapper.Success<T> -> return this
         }
         return null
-    }
-
-    fun setBundle(intent: Intent) {
-
     }
 }
