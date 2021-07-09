@@ -33,66 +33,72 @@ class PostActivity : BaseActivity<ActivityPostBinding, PostBundle, PostViewModel
         }
     }
 
-    override fun ActivityPostBinding.bind() {
-        viewModel.bundle = Gson().fromJson(intent.getStringExtra(BUNDLE_KEY), Post::class.java)
+    override fun viewBinding() {
+        binding.apply {
+            viewModel.bundle = Gson().fromJson(intent.getStringExtra(BUNDLE_KEY), Post::class.java)
 
-        commentAdapter = CommentAdapter()
-        val layoutManager = LinearLayoutManager(this@PostActivity)
+            commentAdapter = CommentAdapter()
+            val layoutManager = LinearLayoutManager(this@PostActivity)
 
-        rvComment.layoutManager = layoutManager
-        rvComment.setHasFixedSize(true)
-        rvComment.adapter = commentAdapter
+            rvComment.layoutManager = layoutManager
+            rvComment.setHasFixedSize(true)
+            rvComment.adapter = commentAdapter
 
-        btDelete.setOnClickListener {
-            dialog = AlertDialog.Builder(this@PostActivity)
-                .setMessage(R.string.check_delete)
-                .setPositiveButton("확인") { _, _ ->
-                    viewModel.bundle?.let {
-                        viewModel.deletePost(it.id)
+            btDelete.setOnClickListener {
+                dialog = AlertDialog.Builder(this@PostActivity)
+                    .setMessage(R.string.check_delete)
+                    .setPositiveButton("확인") { _, _ ->
+                        viewModel.bundle?.let {
+                            viewModel.deletePost(it.id)
+                        }
                     }
-                }
-                .setNegativeButton("취소") { d, _ ->
-                    d.dismiss()
-                }
-                .create()
-            dialog.show()
-        }
+                    .setNegativeButton("취소") { d, _ ->
+                        d.dismiss()
+                    }
+                    .create()
+                dialog.show()
+            }
 
-        btEdit.setOnClickListener {
-            viewModel.bundle?.let {
-                startActivity(PostEditActivity.callingIntent(this@PostActivity, it))
+            btEdit.setOnClickListener {
+                viewModel.bundle?.let {
+                    startActivity(PostEditActivity.callingIntent(this@PostActivity, it))
+                }
             }
         }
     }
 
-    override fun PostViewModel.regist() {
-        observe(post) {
-            binding.apply {
-                tvTitle.text = it.title
-                tvDescription.text = it.body
+    override fun registObserve() {
+        viewModel.apply {
+            observe(post) {
+                binding.apply {
+                    tvTitle.text = it.title
+                    tvDescription.text = it.body
+                }
             }
-        }
 
-        observe(comments) {
-            commentAdapter.addAll(it)
-        }
+            observe(comments) {
+                commentAdapter.addAll(it)
+            }
 
-        observe(deletePost) {
-            Toast.makeText(this@PostActivity, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
-            dialog.dismiss()
-            finish()
+            observe(deletePost) {
+                Toast.makeText(this@PostActivity, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+                finish()
+            }
         }
     }
 
-    override fun PostViewModel.load() {
-        bundle?.let {
-            requestPost(it.id)
-            requestComments(it.id)
+    override fun loadData() {
+        viewModel.apply {
+            bundle?.let {
+                requestPost(it.id)
+                requestComments(it.id)
+            }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.load()
+        loadData()
     }
 }

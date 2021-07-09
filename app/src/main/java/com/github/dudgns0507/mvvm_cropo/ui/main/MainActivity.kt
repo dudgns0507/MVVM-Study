@@ -25,36 +25,40 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainBundle, MainViewModel
         }
     }
 
-    override fun ActivityMainBinding.bind() {
-        postAdapter = PostAdapter(viewModel)
-        val layoutManager = LinearLayoutManager(this@MainActivity)
+    override fun viewBinding() {
+        binding.apply {
+            postAdapter = PostAdapter(viewModel)
+            val layoutManager = LinearLayoutManager(this@MainActivity)
 
-        rvPost.layoutManager = layoutManager
-        rvPost.setHasFixedSize(true)
-        rvPost.adapter = postAdapter
-        rvPost.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition()
-                if (layoutManager.itemCount <= lastVisibleItem + 2) {
-                    viewModel.loadMore()
+            rvPost.layoutManager = layoutManager
+            rvPost.setHasFixedSize(true)
+            rvPost.adapter = postAdapter
+            rvPost.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition()
+                    if (layoutManager.itemCount <= lastVisibleItem + 2) {
+                        viewModel.loadMore()
+                    }
                 }
+            })
+        }
+    }
+
+    override fun registObserve() {
+        viewModel.apply {
+            observe(posts) { posts ->
+                postAdapter.addAll(posts)
             }
-        })
-    }
 
-    override fun MainViewModel.regist() {
-        observe(posts) { posts ->
-            postAdapter.addAll(posts)
-        }
-
-        observe(openPostDetail) { post ->
-            startActivity(PostActivity.callingIntent(this@MainActivity, post))
+            observe(openPostDetail) { post ->
+                startActivity(PostActivity.callingIntent(this@MainActivity, post))
+            }
         }
     }
 
-    override fun MainViewModel.load() {
-        requestPosts()
+    override fun loadData() {
+        viewModel.requestPosts()
     }
 
     override fun onResume() {

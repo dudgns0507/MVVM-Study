@@ -26,31 +26,35 @@ class PostEditActivity : BaseActivity<ActivityPostEditBinding, PostEditBundle, P
         }
     }
 
-    override fun ActivityPostEditBinding.bind() {
-        bundle?.let {
-            etTitle.setText(it.title)
-            etBody.setText(it.body)
-        }
-
-        btSave.setOnClickListener {
+    override fun viewBinding() {
+        binding.apply {
             bundle?.let {
-                viewModel.patchPost(
-                    it.id, RequestPostEdit(
-                        title = etTitle.text.toString(),
-                        body = etBody.text.toString()
+                etTitle.setText(it.title)
+                etBody.setText(it.body)
+            }
+
+            btSave.setOnClickListener {
+                bundle?.let {
+                    viewModel.patchPost(
+                        it.id, RequestPostEdit(
+                            title = etTitle.text.toString(),
+                            body = etBody.text.toString()
+                        )
                     )
-                )
+                }
             }
         }
     }
 
-    override fun PostEditViewModel.regist() {
-        observe(editPost) {
-            Toast.makeText(this@PostEditActivity, "저장되었습니다.", Toast.LENGTH_SHORT).show()
-            finish()
+    override fun registObserve() {
+        viewModel.apply {
+            observe(editPost) {
+                Toast.makeText(this@PostEditActivity, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
 
-    override fun PostEditViewModel.load() {
+    override fun loadData() {
     }
 }

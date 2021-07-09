@@ -26,21 +26,17 @@ abstract class BaseActivity<T : ViewDataBinding, B : Parcelable, V : BaseViewMod
     abstract val layoutResId: Int
     abstract val viewModel: V
 
-    val ctx: Context by lazy {
-        this
-    }
+    val ctx: Context by lazy { this }
 
-    val bundle: B? by lazy {
-        initBundle()
-    }
+    val bundle: B? by lazy { initBundle() }
 
     private fun initBundle(): B? {
         return intent.getParcelableExtra(BUNDLE_KEY)
     }
 
-    abstract fun T.bind()
-    abstract fun V.regist()
-    abstract fun V.load()
+    abstract fun viewBinding()
+    abstract fun registObserve()
+    abstract fun loadData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,9 +49,9 @@ abstract class BaseActivity<T : ViewDataBinding, B : Parcelable, V : BaseViewMod
         binding.apply {
             lifecycleOwner = this@BaseActivity
 
-            bind()
+            viewBinding()
         }
-        viewModel.regist()
-        viewModel.load()
+        registObserve()
+        loadData()
     }
 }
