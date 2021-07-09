@@ -1,5 +1,6 @@
 package com.github.dudgns0507.core.util
 
+import com.github.dudgns0507.core.util.exception.NetworkStatusException
 import com.squareup.moshi.Moshi
 import okhttp3.Request
 import okhttp3.ResponseBody
@@ -38,6 +39,7 @@ class SafeCall<T : Any, E : Any>(
 
     private fun getError(throwable: Throwable): ResultWrapper<T> {
         return when (throwable) {
+            is NetworkStatusException -> ResultWrapper.NetworkError(throwable)
             is HttpException -> ResultWrapper.ApiError(throwable.code(), convertErrorBody(throwable))
             is IOException -> ResultWrapper.NetworkError(throwable)
             else -> ResultWrapper.UnknownError(throwable)

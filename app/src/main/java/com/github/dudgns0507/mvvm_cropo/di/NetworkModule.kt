@@ -1,7 +1,9 @@
 package com.github.dudgns0507.mvvm_cropo.di
 
+import android.content.Context
 import com.github.dudgns0507.core.moshi.MyKotlinJsonAdapterFactory
 import com.github.dudgns0507.core.moshi.MyStandardJsonAdapters
+import com.github.dudgns0507.core.util.NetworkInterceptor
 import com.github.dudgns0507.core.util.SafeCallAdapterFactory
 import com.github.dudgns0507.mvvm_cropo.data.service.ApiService
 import com.github.dudgns0507.mvvm_cropo.isDebug
@@ -10,6 +12,7 @@ import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -58,10 +61,11 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(headerInterceptor)
             .addInterceptor(logger)
+            .addInterceptor(NetworkInterceptor(context))
             .connectTimeout(timeoutConnect.toLong(), TimeUnit.SECONDS)
             .readTimeout(timeoutRead.toLong(), TimeUnit.SECONDS)
             .build()
