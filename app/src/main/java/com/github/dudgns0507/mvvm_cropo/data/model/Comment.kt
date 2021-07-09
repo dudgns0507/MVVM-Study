@@ -8,14 +8,9 @@ import kotlinx.android.parcel.Parcelize
 @JsonClass(generateAdapter = false)
 @Parcelize
 data class Comment(
-    @Json(name = "postId")
-    val postId: Int = 0,
-    @Json(name = "id")
-    val id: Int = 0,
-    @Json(name = "name")
-    val name: String = "",
-    @Json(name = "email")
-    val email: String = "",
-    @Json(name = "body")
-    val body: String = "",
+    @Json(name = "postId") val postId: Int = 0,
+    @Json(name = "id") val id: Int = 0,
+    @Json(name = "name") val name: String = "",
+    @Json(name = "email") val email: String = "",
+    @Json(name = "body") val body: String = "",
 ) : Parcelable

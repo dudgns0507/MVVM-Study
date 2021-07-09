@@ -2,14 +2,25 @@ package com.github.dudgns0507.core.util
 
 import java.io.IOException
 
-sealed class ResultWrapper<out T> {
-    data class Success<out T>(val value: T) : ResultWrapper<T>()
-    data class ApiError(val code: Int? = null, val error: ErrorResponse? = null) : ResultWrapper<Nothing>()
-    data class NetworkError(val error: IOException) : ResultWrapper<Nothing>()
-    data class UnknownError(val throwable: Throwable?) : ResultWrapper<Nothing>()
-}
+sealed class ResultWrapper<out T : Any, out U : Any> {
 
-data class ErrorResponse(
-    val error_description: String,
-    val causes: Map<String, String> = emptyMap()
-)
+    /**
+     * Success response with body
+     */
+    data class Success<out T : Any>(val value: T) : ResultWrapper<T, Nothing>()
+
+    /**
+     * Failure response with body
+     */
+    data class ApiError<U : Any>(val code: Int? = null, val error: U? = null) : ResultWrapper<Nothing, U>()
+
+    /**
+     * Network error
+     */
+    data class NetworkError(val error: IOException) : ResultWrapper<Nothing, Nothing>()
+
+    /**
+     * For example, json parsing error
+     */
+    data class UnknownError(val throwable: Throwable?) : ResultWrapper<Nothing, Nothing>()
+}

@@ -27,7 +27,8 @@ class SafeCallAdapterFactory : CallAdapter.Factory() {
         check(responseType is ParameterizedType) { "Response must be parameterized as ResultWrapper<Foo> or ResultWrapper<out Foo>" }
 
         val successBodyType = getParameterUpperBound(0, responseType)
-        val errorBodyConverter = retrofit.nextResponseBodyConverter<Any>(null, Any::class.java, annotations)
+        val errorBodyType = getParameterUpperBound(1, responseType)
+        val errorBodyConverter = retrofit.nextResponseBodyConverter<Any>(null, errorBodyType, annotations)
 
         return SafeCallAdapter<Any, Any>(successBodyType, errorBodyConverter)
     }
