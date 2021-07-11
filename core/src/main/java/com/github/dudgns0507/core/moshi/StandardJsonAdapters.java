@@ -22,7 +22,7 @@ import java.util.Set;
 
 import static com.squareup.moshi.internal.Util.generatedAdapter;
 
-public final class MyStandardJsonAdapters {
+public final class StandardJsonAdapters {
     static final JsonAdapter<Boolean> BOOLEAN_JSON_ADAPTER = new JsonAdapter<Boolean>() {
         @Override
         public Boolean fromJson(JsonReader reader) throws IOException {
@@ -223,7 +223,7 @@ public final class MyStandardJsonAdapters {
         }
     };
 
-    private MyStandardJsonAdapters() {
+    private StandardJsonAdapters() {
     }
 
     static int rangeCheckNextInt(JsonReader reader, String typeMessage, int min, int max)
