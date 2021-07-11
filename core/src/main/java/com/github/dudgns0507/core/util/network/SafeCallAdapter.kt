@@ -1,4 +1,4 @@
-package com.github.dudgns0507.core.util
+package com.github.dudgns0507.core.util.network
 
 import okhttp3.ResponseBody
 import retrofit2.Call

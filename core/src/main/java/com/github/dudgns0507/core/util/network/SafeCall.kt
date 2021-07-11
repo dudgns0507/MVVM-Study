@@ -1,4 +1,4 @@
-package com.github.dudgns0507.core.util
+package com.github.dudgns0507.core.util.network
 
 import com.github.dudgns0507.core.util.exception.NetworkStatusException
 import okhttp3.Request
@@ -81,7 +81,5 @@ class SafeCall<T : Any, E : Any>(
 
     override fun request(): Request = delegate.request()
 
-    override fun timeout(): Timeout {
-        return timeout()
-    }
+    override fun timeout(): Timeout = timeout()
 }

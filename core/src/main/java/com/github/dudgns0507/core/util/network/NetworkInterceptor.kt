@@ -1,4 +1,4 @@
-package com.github.dudgns0507.core.util
+package com.github.dudgns0507.core.util.network
 
 import android.content.Context
 import com.github.dudgns0507.core.util.exception.NetworkStatusException

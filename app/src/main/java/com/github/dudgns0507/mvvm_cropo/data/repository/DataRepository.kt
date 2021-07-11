@@ -1,7 +1,7 @@
 package com.github.dudgns0507.mvvm_cropo.data.repository
 
-import com.github.dudgns0507.core.util.GenericError
-import com.github.dudgns0507.core.util.ResultWrapper
+import com.github.dudgns0507.core.util.network.GenericError
+import com.github.dudgns0507.core.util.network.ResultWrapper
 import com.github.dudgns0507.mvvm_cropo.data.model.Comment
 import com.github.dudgns0507.mvvm_cropo.data.model.Post
 import com.github.dudgns0507.mvvm_cropo.data.model.RequestPostEdit

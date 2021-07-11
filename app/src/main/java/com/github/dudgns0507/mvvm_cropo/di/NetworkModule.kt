@@ -3,8 +3,8 @@ package com.github.dudgns0507.mvvm_cropo.di
 import android.content.Context
 import com.github.dudgns0507.core.moshi.MyKotlinJsonAdapterFactory
 import com.github.dudgns0507.core.moshi.MyStandardJsonAdapters
-import com.github.dudgns0507.core.util.NetworkInterceptor
-import com.github.dudgns0507.core.util.SafeCallAdapterFactory
+import com.github.dudgns0507.core.util.network.NetworkInterceptor
+import com.github.dudgns0507.core.util.network.SafeCallAdapterFactory
 import com.github.dudgns0507.mvvm_cropo.data.service.ApiService
 import com.github.dudgns0507.mvvm_cropo.isDebug
 import com.github.dudgns0507.mvvm_cropo.url

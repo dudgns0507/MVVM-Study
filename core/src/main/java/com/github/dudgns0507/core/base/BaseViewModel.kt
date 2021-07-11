@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.github.dudgns0507.core.util.GenericError
-import com.github.dudgns0507.core.util.ResultWrapper
+import com.github.dudgns0507.core.util.network.GenericError
+import com.github.dudgns0507.core.util.network.ResultWrapper
 import java.io.IOException
 
 open class BaseViewModel(private val state: SavedStateHandle) : ViewModel() {
