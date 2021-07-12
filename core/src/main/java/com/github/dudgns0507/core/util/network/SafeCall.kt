@@ -18,10 +18,11 @@ class SafeCall<T : Any, E : Any>(
                 val body = response.body()
                 val code = response.code()
                 val error = response.errorBody()
+                val headers = response.headers()
 
                 try {
                     body?.let {
-                        callback.onResponse(this@SafeCall, Response.success(ResultWrapper.Success(it)))
+                        callback.onResponse(this@SafeCall, Response.success(ResultWrapper.Success(headers = headers, value = it)))
                     } ?: kotlin.run {
                         callback.onResponse(this@SafeCall, Response.success(ResultWrapper.UnknownError(null)))
                     }

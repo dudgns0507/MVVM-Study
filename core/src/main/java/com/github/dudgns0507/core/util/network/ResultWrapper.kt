@@ -1,5 +1,6 @@
 package com.github.dudgns0507.core.util.network
 
+import okhttp3.Headers
 import java.io.IOException
 
 sealed class ResultWrapper<out T : Any, out U : Any> {
@@ -7,7 +8,7 @@ sealed class ResultWrapper<out T : Any, out U : Any> {
     /**
      * Success response with body
      */
-    data class Success<out T : Any>(val value: T) : ResultWrapper<T, Nothing>()
+    data class Success<out T : Any>(val headers: Headers, val value: T) : ResultWrapper<T, Nothing>()
 
     /**
      * Failure response with body
