@@ -15,7 +15,7 @@ class NetworkInterceptor(val context: Context) : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
-        if (!context.isNetworkAvailable()) {
+        if (!isConnected) {
             throw NetworkStatusException()
         }
 
