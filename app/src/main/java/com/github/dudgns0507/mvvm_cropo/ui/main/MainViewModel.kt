@@ -6,6 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.github.dudgns0507.core.base.BaseViewModel
 import com.github.dudgns0507.core.util.SingleEvent
+import com.github.dudgns0507.core.util.network.updateOnSuccess
 import com.github.dudgns0507.mvvm_cropo.data.model.Post
 import com.github.dudgns0507.mvvm_cropo.data.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,13 +20,17 @@ class MainViewModel @Inject constructor(
 ) : BaseViewModel(state) {
     val openPostDetail = SingleEvent<Post>()
 
-    private val _posts = MutableLiveData<List<Post>>()
-    val posts: LiveData<List<Post>> = _posts
+    private val _posts = MutableLiveData<List<Post>?>()
+    val posts: LiveData<List<Post>?> = _posts
 
     private var count = 0
 
     fun requestPosts() = viewModelScope.launch {
         val response = dataRepository.requestPosts(count, 10)
+        
+        response.updateOnSuccess(_posts, onError = {
+
+        })
 
         response.getData()?.let { result ->
             result.value.let {
