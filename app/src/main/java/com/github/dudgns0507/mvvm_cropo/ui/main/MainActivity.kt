@@ -11,7 +11,6 @@ import com.github.dudgns0507.mvvm_cropo.R
 import com.github.dudgns0507.mvvm_cropo.databinding.ActivityMainBinding
 import com.github.dudgns0507.mvvm_cropo.ui.post.PostActivity
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainBundle, MainViewModel>() {
     override val layoutResId = R.layout.activity_main
