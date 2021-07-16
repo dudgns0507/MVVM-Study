@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import kotlin.contracts.InvocationKind
-import kotlin.contracts.contract
 
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     companion object {
@@ -38,7 +36,12 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         super.onCreate(savedInstanceState)
 
         act = requireActivity() as AppCompatActivity
-        baseAct = requireActivity() as BaseActivity<*, *, *>
+
+        try {
+            baseAct = requireActivity() as BaseActivity<*, *, *>
+        } catch (e: Exception) {
+            
+        }
     }
 
     override fun onCreateView(

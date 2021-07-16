@@ -4,4 +4,6 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class MainBundle(val t: String) : Parcelable
+data class MainBundle(
+    val t: String
+) : Parcelable
