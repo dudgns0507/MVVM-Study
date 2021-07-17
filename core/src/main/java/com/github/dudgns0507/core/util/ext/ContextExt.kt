@@ -1,6 +1,7 @@
 package com.github.dudgns0507.core.util.ext
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -8,7 +9,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.Parcelable
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.github.dudgns0507.core.base.BaseActivity
+import com.google.android.material.snackbar.Snackbar
 
 fun Context.openBrowser(url: String) {
     val uri = Uri.parse(url)
@@ -61,4 +64,37 @@ inline fun <reified T> Context.moveTo(bundle: Parcelable? = null): Intent {
     val intent = Intent(this, T::class.java)
     intent.putExtra(BaseActivity.BUNDLE_KEY, bundle)
     return intent
+}
+
+fun Context.alert(
+    title: String = "",
+    message: String = "",
+    titleId: Int = 0,
+    messageId: Int = 0
+): AlertDialog.Builder {
+    return AlertDialog.Builder(this).apply {
+        if (titleId != 0) {
+            setTitle(str(titleId))
+        } else if (title.isNotBlank()) {
+            setTitle(title)
+        }
+
+        if (messageId != 0) {
+            setTitle(str(messageId))
+        } else if (message.isNotBlank()) {
+            setMessage(message)
+        }
+    }
+}
+
+fun Context.str(id: Int): String {
+    return this.getString(id)
+}
+
+fun Context.color(id: Int): Int {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        getColor(id)
+    } else {
+        resources.getColor(id)
+    }
 }
