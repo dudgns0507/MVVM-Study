@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.dudgns0507.core.base.BaseActivity
+import com.github.dudgns0507.core.util.ext.isNull
 import com.github.dudgns0507.core.util.ext.observe
 import com.github.dudgns0507.mvvm_cropo.R
 import com.github.dudgns0507.mvvm_cropo.databinding.ActivityMainBinding

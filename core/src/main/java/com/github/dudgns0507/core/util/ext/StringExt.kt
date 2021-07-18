@@ -13,3 +13,12 @@ import androidx.lifecycle.Observer
 fun String.isEmail(): Boolean {
     return Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }
+
+fun String.isLink(): Boolean {
+    return Patterns.WEB_URL.matcher(this).matches()
+}
+
+fun String.isPhone(): Boolean {
+    return Patterns.PHONE.matcher(this).matches()
+}
+
