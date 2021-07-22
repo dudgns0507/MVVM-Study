@@ -22,3 +22,8 @@ fun String.isPhone(): Boolean {
     return Patterns.PHONE.matcher(this).matches()
 }
 
+val String.containsDigit: Boolean
+    get() = matches(Regex(".*[0-9].*"))
+
+val String.isAlpha: Boolean
+    get() = matches(Regex("[a-zA-Z0-9]*"))
