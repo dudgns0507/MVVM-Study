@@ -6,8 +6,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.github.dudgns0507.core.base.BaseViewModel
 import com.github.dudgns0507.core.util.SingleEvent
-import com.github.dudgns0507.mvvm_cropo.data.model.Comment
-import com.github.dudgns0507.mvvm_cropo.data.model.Post
+import com.github.dudgns0507.mvvm_cropo.data.model.ResponseComment
+import com.github.dudgns0507.mvvm_cropo.data.model.ResponsePost
 import com.github.dudgns0507.mvvm_cropo.data.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,15 +18,15 @@ class PostViewModel @Inject constructor(
     state: SavedStateHandle,
     private val dataRepository: DataRepository
 ) : BaseViewModel(state) {
-    var bundle: Post? = null
+    var bundle: ResponsePost? = null
 
     val deletePost = SingleEvent<String>()
 
-    private val _comments = MutableLiveData<List<Comment>>()
-    val comments: LiveData<List<Comment>> = _comments
+    private val _comments = MutableLiveData<List<ResponseComment>>()
+    val comments: LiveData<List<ResponseComment>> = _comments
 
-    private val _post = MutableLiveData<Post>()
-    val post: LiveData<Post> = _post
+    private val _post = MutableLiveData<ResponsePost>()
+    val post: LiveData<ResponsePost> = _post
 
     fun requestPost(id: Int) = viewModelScope.launch {
         val response = dataRepository.requestPost(id)

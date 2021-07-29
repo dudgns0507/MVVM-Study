@@ -2,8 +2,8 @@ package com.github.dudgns0507.mvvm_cropo.data.service
 
 import com.github.dudgns0507.core.util.network.GenericError
 import com.github.dudgns0507.core.util.network.ResultWrapper
-import com.github.dudgns0507.mvvm_cropo.data.model.Comment
-import com.github.dudgns0507.mvvm_cropo.data.model.Post
+import com.github.dudgns0507.mvvm_cropo.data.model.ResponseComment
+import com.github.dudgns0507.mvvm_cropo.data.model.ResponsePost
 import com.github.dudgns0507.mvvm_cropo.data.model.RequestPostEdit
 import retrofit2.http.*
 
@@ -12,17 +12,17 @@ interface ApiService {
     suspend fun requestPosts(
         @Query("_start") start: Int,
         @Query("_limit") limit: Int
-    ): ResultWrapper<List<Post>, GenericError>
+    ): ResultWrapper<List<ResponsePost>, GenericError>
 
     @GET("posts/{postId}")
     suspend fun requestPost(
         @Path("postId") postId: Int
-    ): ResultWrapper<Post, GenericError>
+    ): ResultWrapper<ResponsePost, GenericError>
 
     @GET("posts/{postId}/comments")
     suspend fun requestPostComments(
         @Path("postId") postId: Int
-    ): ResultWrapper<List<Comment>, GenericError>
+    ): ResultWrapper<List<ResponseComment>, GenericError>
 
     @DELETE("posts/{postId}")
     suspend fun deletePost(
@@ -33,5 +33,5 @@ interface ApiService {
     suspend fun patchPost(
         @Path("postId") postId: Int,
         @Body post: RequestPostEdit
-    ): ResultWrapper<Post, GenericError>
+    ): ResultWrapper<ResponsePost, GenericError>
 }

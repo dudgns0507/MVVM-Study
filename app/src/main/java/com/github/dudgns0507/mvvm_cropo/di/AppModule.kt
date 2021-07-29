@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class AppModule {
     @Provides
     @Singleton
-    fun bindDataManager(): DataManager {
+    fun provideDataManager(): DataManager {
         return DataManager()
     }
 }

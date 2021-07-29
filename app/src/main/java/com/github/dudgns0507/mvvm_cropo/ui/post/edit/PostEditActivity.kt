@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import com.github.dudgns0507.core.base.BaseActivity
 import com.github.dudgns0507.core.util.ext.observe
 import com.github.dudgns0507.mvvm_cropo.R
-import com.github.dudgns0507.mvvm_cropo.data.model.Post
+import com.github.dudgns0507.mvvm_cropo.data.model.ResponsePost
 import com.github.dudgns0507.mvvm_cropo.data.model.RequestPostEdit
 import com.github.dudgns0507.mvvm_cropo.databinding.ActivityPostEditBinding
 import com.google.gson.Gson
@@ -19,7 +19,7 @@ class PostEditActivity : BaseActivity<ActivityPostEditBinding, PostEditBundle, P
     override val viewModel: PostEditViewModel by viewModels()
 
     companion object {
-        fun callingIntent(context: Context, post: Post): Intent {
+        fun callingIntent(context: Context, post: ResponsePost): Intent {
             val intent = Intent(context, PostEditActivity::class.java)
             intent.putExtra(BUNDLE_KEY, Gson().toJson(post))
             return intent

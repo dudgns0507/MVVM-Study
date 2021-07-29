@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.dudgns0507.core.base.OnItemClickListener
-import com.github.dudgns0507.mvvm_cropo.data.model.Post
+import com.github.dudgns0507.mvvm_cropo.data.model.ResponsePost
 import com.github.dudgns0507.mvvm_cropo.databinding.PostItemBinding
 
 class PostAdapter(
     private val viewModel: MainViewModel
 ) : RecyclerView.Adapter<PostViewHolder>() {
-    private val posts = arrayListOf<Post>()
+    private val posts = arrayListOf<ResponsePost>()
 
-    private val onItemClickListener: OnItemClickListener<Post> = object : OnItemClickListener<Post> {
-        override fun onItemClicked(position: Int, item: Post) {
+    private val onItemClickListener: OnItemClickListener<ResponsePost> = object : OnItemClickListener<ResponsePost> {
+        override fun onItemClicked(position: Int, item: ResponsePost) {
             viewModel.openPostDetail(item)
         }
     }
@@ -37,7 +37,7 @@ class PostAdapter(
         return posts.size
     }
 
-    fun addAll(p: List<Post>) {
+    fun addAll(p: List<ResponsePost>) {
         posts.addAll(p)
         notifyDataSetChanged()
     }

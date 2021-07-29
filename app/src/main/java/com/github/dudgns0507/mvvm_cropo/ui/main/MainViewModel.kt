@@ -6,7 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.github.dudgns0507.core.base.BaseViewModel
 import com.github.dudgns0507.core.util.SingleEvent
-import com.github.dudgns0507.mvvm_cropo.data.model.Post
+import com.github.dudgns0507.mvvm_cropo.data.model.ResponsePost
 import com.github.dudgns0507.mvvm_cropo.data.repository.DataRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,10 +17,10 @@ class MainViewModel @Inject constructor(
     state: SavedStateHandle,
     private val dataRepository: DataRepository
 ) : BaseViewModel(state) {
-    val openPostDetail = SingleEvent<Post>()
+    val openPostDetail = SingleEvent<ResponsePost>()
 
-    private val _posts = MutableLiveData<List<Post>>()
-    val posts: LiveData<List<Post>> = _posts
+    private val _posts = MutableLiveData<List<ResponsePost>>()
+    val posts: LiveData<List<ResponsePost>> = _posts
 
     private var count = 0
 
@@ -47,7 +47,7 @@ class MainViewModel @Inject constructor(
         requestPosts()
     }
 
-    fun openPostDetail(post: Post) {
+    fun openPostDetail(post: ResponsePost) {
         openPostDetail.postValue(post)
     }
 }

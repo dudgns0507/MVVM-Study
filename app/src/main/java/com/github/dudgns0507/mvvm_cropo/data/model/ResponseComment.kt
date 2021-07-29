@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @JsonClass(generateAdapter = false)
 @Parcelize
-data class Comment(
+data class ResponseComment(
     @Json(name = "postId") val postId: Int = 0,
     @Json(name = "id") val id: Int = 0,
     @Json(name = "name") val name: String = "",
