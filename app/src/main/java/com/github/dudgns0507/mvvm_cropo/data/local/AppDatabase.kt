@@ -5,10 +5,10 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [
-        PostItem::class
+        UserItem::class
     ],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun postItemDao(): PostItemDao
+    abstract fun userItemDao(): UserItemDao
 }

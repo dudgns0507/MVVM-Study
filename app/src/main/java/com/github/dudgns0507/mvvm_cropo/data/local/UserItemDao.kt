@@ -8,16 +8,16 @@ import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 
 @Dao
-interface PostItemDao {
+interface UserItemDao {
     @Insert(onConflict = REPLACE)
-    suspend fun insertPostItem(postItem: PostItem)
+    suspend fun insertUserItem(postItem: UserItem)
 
     @Delete
-    suspend fun deletePostItem(postItem: PostItem)
+    suspend fun deleteUserItem(postItem: UserItem)
 
-    @Query("DELETE FROM post_items")
-    suspend fun deleteAllPostItem()
+    @Query("DELETE FROM users")
+    suspend fun deleteAllUserItem()
 
-    @Query("SELECT * FROM post_items")
-    fun observeAllPostItems(): LiveData<List<PostItem>>
+    @Query("SELECT * FROM users")
+    fun observeAllUserItems(): LiveData<List<UserItem>>
 }

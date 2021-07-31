@@ -2,9 +2,8 @@ package com.github.dudgns0507.mvvm_cropo.di
 
 import android.content.Context
 import androidx.room.Room
-import com.github.dudgns0507.mvvm_cropo.data.DataManager
 import com.github.dudgns0507.mvvm_cropo.data.local.AppDatabase
-import com.github.dudgns0507.mvvm_cropo.data.local.PostItemDao
+import com.github.dudgns0507.mvvm_cropo.data.local.UserItemDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +27,7 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideChannelDao(appDatabase: AppDatabase): PostItemDao {
-        return appDatabase.postItemDao()
+    fun provideUserDao(appDatabase: AppDatabase): UserItemDao {
+        return appDatabase.userItemDao()
     }
 }

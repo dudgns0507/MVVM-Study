@@ -7,12 +7,10 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
-@Entity(tableName = "comment_items")
-data class CommentItem(
+@Entity(tableName = "users")
+data class UserItem (
     @PrimaryKey
     val id: Int = 0,
-    val postId: Int = 0,
-    val name: String = "",
-    val email: String = "",
-    val body: String = "",
+    val userId: String = "",
+    val userPw: String = ""
 )
