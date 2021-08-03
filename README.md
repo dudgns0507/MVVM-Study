@@ -14,7 +14,7 @@ MVVM Sample Code using DI(Hilt) + Retrofit + Coroutine + Moshi + Room + AAC
     * [Glide](https://github.com/coil-kt/coil)
     * [Lottie](http://airbnb.io/lottie) - ing...
 * Architecture
-    * MVVM
+    * [MVVM](https://en.wikipedia.org/wiki/Model–view–viewmodel)
     * [Android Architecture components](https://developer.android.com/topic/libraries/architecture) ([ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), [LiveData](https://developer.android.com/topic/libraries/architecture/livedata), [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation))
     * [Android KTX](https://developer.android.com/kotlin/ktx)
 * CI - ing...
