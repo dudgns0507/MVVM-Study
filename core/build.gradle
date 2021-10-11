@@ -64,6 +64,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.12.0") {
         exclude group: "com.android.support"
     }
+    implementation 'com.github.dudgns0507:Kref:1.0.1'
 }
 
 kapt {

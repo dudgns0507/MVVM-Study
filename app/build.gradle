@@ -64,11 +64,12 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     // Gson, Moshi
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.7'
     implementation "com.squareup.moshi:moshi:1.12.0"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:1.12.0"
 
     // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
 
@@ -91,6 +92,8 @@ dependencies {
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
 
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    implementation 'com.github.dudgns0507:Kref:1.0.1'
 }
 
 kapt {
